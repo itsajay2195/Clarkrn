@@ -34,7 +34,7 @@ const ProductListScreen = () => {
         keyExtractor={item => item.id}
         renderItem={({item, index}) => {
           const inputRange = [-1, 0, 90 * index, 90 * (index + 2)];
-          const opacityInputRange = [-1, 0, 90 * index, 90 * (index + 1)];
+          const opacityInputRange = [-1, 0, 90 * index, 90 * (index + 1.25)];
           const scale = scrollY.interpolate({
             inputRange,
             outputRange: [1, 1, 1, 0],
