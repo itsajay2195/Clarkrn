@@ -8,7 +8,7 @@ import ProductListScreen from '../screens/ProductListScreen/ProductListScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen/ProductDetailsScreen';
 
 const Stack = createNativeStackNavigator();
-//initialRouteName={LOGGED_IN_SCREEN_NAME.dishReviewScreen}
+
 const RootNavigation = () => {
   return (
     <NavigationContainer>
@@ -26,11 +26,7 @@ const RootNavigation = () => {
             <Stack.Screen
               name={SCREEN_CONSTANTS.productDetails}
               component={ProductDetailsScreen}
-              options={{
-                headerTransparent: true, // Make the header background transparent
-                headerTitle: '', // Remove the title
-                headerBackVisible: true, // Show the back arrow
-              }}
+              options={{headerShown: false}}
             />
           </Stack.Navigator>
         </KeyboardAvoidingView>
