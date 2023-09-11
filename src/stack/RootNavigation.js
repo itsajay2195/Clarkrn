@@ -26,7 +26,11 @@ const RootNavigation = () => {
             <Stack.Screen
               name={SCREEN_CONSTANTS.productDetails}
               component={ProductDetailsScreen}
-              options={{headerShown: true}}
+              options={{
+                headerTransparent: true, // Make the header background transparent
+                headerTitle: '', // Remove the title
+                headerBackVisible: true, // Show the back arrow
+              }}
             />
           </Stack.Navigator>
         </KeyboardAvoidingView>

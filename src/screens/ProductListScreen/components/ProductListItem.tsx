@@ -7,6 +7,8 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {SCREEN_CONSTANTS} from '../../../constants/ScreenConstants';
 
 interface Product {
   id: string;
@@ -15,6 +17,7 @@ interface Product {
   thumbnail: string;
   price: string;
   category: string;
+  images: [];
 }
 
 interface ProductListItemProps {
@@ -41,6 +44,8 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
     outputRange: [1, 1, 1, 0],
   });
 
+  const navigation = useNavigation();
+
   return (
     <Animated.View
       style={[
@@ -50,7 +55,9 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
           transform: [{scale}],
         },
       ]}>
-      <TouchableOpacity style={styles.itemContainer}>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() => navigation.navigate(SCREEN_CONSTANTS.productDetails)}>
         <View style={styles.thumbnailContainer}>
           <Image
             source={{uri: item.thumbnail}}

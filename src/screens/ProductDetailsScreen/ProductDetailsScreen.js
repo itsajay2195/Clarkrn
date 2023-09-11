@@ -1,14 +1,24 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import appConfig from '../../styles/theme';
+import {DATA} from '../../data';
+import ImageCarousel from './Components/ImageCarousel';
 
-const ProductDetailsScreen = () => {
+const Images = DATA.products[0].images;
+
+const ProductDetailsScreen: React.FC = () => {
   return (
-    <View>
-      <Text>ProductDetailsScreen</Text>
+    <View style={styles.container}>
+      <ImageCarousel images={Images} />
     </View>
   );
 };
 
-export default ProductDetailsScreen;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: appConfig.colors.dark,
+  },
+});
 
-const styles = StyleSheet.create({});
+export default ProductDetailsScreen;
