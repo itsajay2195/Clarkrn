@@ -14,6 +14,7 @@ interface Product {
   brand: string;
   thumbnail: string;
   price: string;
+  category: string;
 }
 
 interface ProductListItemProps {
@@ -62,7 +63,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
             {item.title}
           </Text>
           <Text style={styles.brand} numberOfLines={1}>
-            {item.brand}
+            {item.category}
           </Text>
         </View>
         <View style={styles.priceContainer}>
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     color: 'black',
-    marginRight: 10,
+    marginRight: 14,
   },
   brand: {
     fontSize: 16,
