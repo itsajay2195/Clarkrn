@@ -1,8 +1,8 @@
 import React, {createContext, useState} from 'react';
 
-export const ContactContext = createContext();
+export const ProductContext = createContext();
 
-export const ContactContextProvider = ({children}) => {
+export const ProductContextProvider = ({children}) => {
   const [productState, setProductState] = useState({
     data: null,
     loading: false,
@@ -20,13 +20,13 @@ export const ContactContextProvider = ({children}) => {
   // Define any other state variables or functions you want to share
 
   return (
-    <ContactContext.Provider
+    <ProductContext.Provider
       value={{
         productState,
         setData,
         setLoader,
       }}>
       {children}
-    </ContactContext.Provider>
+    </ProductContext.Provider>
   );
 };
