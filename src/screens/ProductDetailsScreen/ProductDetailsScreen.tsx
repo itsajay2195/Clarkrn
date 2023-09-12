@@ -4,6 +4,7 @@ import appConfig from '../../styles/theme';
 import {DATA} from '../../data';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
+import {ProductContext} from '../../context/ProductContext';
 
 const Images = DATA.products[0].images;
 
