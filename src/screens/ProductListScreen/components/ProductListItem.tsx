@@ -57,7 +57,9 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
       ]}>
       <TouchableOpacity
         style={styles.itemContainer}
-        onPress={() => navigation.navigate(SCREEN_CONSTANTS.productDetails)}>
+        onPress={() =>
+          navigation.navigate(SCREEN_CONSTANTS.productDetails, {id: item.id})
+        }>
         <View style={styles.thumbnailContainer}>
           <Image
             source={{uri: item.thumbnail}}

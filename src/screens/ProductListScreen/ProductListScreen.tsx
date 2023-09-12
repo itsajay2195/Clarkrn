@@ -60,7 +60,7 @@ const ProductListScreen: React.FC = () => {
         </View>
       ) : (
         <Animated.FlatList
-          data={data.products as unknown as Product[]}
+          data={data?.products as unknown as Product[]}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollY}}}],
             {useNativeDriver: true},

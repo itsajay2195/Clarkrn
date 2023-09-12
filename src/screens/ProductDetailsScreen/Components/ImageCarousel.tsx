@@ -9,7 +9,7 @@ import {
 import appConfig from '../../../styles/theme';
 
 interface ImageCarouselProps {
-  images: string[];
+  images?: [];
 }
 const viewConfigRef = {viewAreaCoveragePercentThreshold: 90};
 const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
@@ -47,7 +47,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
         onViewableItemsChanged={onViewRef.current}
       />
       <View style={styles.dotView}>
-        {images.map((_, index) => (
+        {images?.map((_, index) => (
           <TouchableOpacity
             key={`circle-dot${index}`}
             onPress={() => scrollToIndex(index)}

@@ -6,6 +6,8 @@ export const ProductContextProvider = ({children}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const getData = id => data?.products.filter(item => item.id === id);
+
   // Define any other state variables or functions you want to share
 
   return (
@@ -15,6 +17,7 @@ export const ProductContextProvider = ({children}) => {
         setData,
         loading,
         setLoading,
+        getData,
       }}>
       {children}
     </ProductContext.Provider>
