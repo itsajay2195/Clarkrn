@@ -6,6 +6,7 @@ import Header from './Components/Header';
 import {ProductContext} from '../../context/ProductContext';
 import Discount from './Components/Discount';
 import Line from '../../components/Line';
+import Rating from '../../components/Rating';
 
 interface ItemProps {
   id?: string;
@@ -50,6 +51,7 @@ const ProductDetailsScreen: React.FC = props => {
           </Text>
           <Discount percentage={item?.discountPercentage} />
         </View>
+        <Rating rating={item?.rating} />
         <View>
           <Text
             style={{
