@@ -40,26 +40,12 @@ const ProductDetailsScreen: React.FC = props => {
       <ImageCarousel images={item?.images} />
       <View style={styles.contentStyle}>
         <View style={{flexDirection: 'row'}}>
-          <Text
-            style={{
-              fontSize: appConfig.fontSizes.large,
-              fontWeight: '600',
-              fontStyle: 'normal',
-              color: appConfig.colors.blueSecondary,
-            }}>
-            {item?.title}
-          </Text>
+          <Text style={styles.itemTitleStlye}>{item?.title}</Text>
           <Discount percentage={item?.discountPercentage} />
         </View>
         <Rating rating={item?.rating} />
         <View>
-          <Text
-            style={{
-              paddingVertical: 5,
-              fontWeight: '600',
-              fontSize: appConfig.fontSizes.medium + 2,
-              color: appConfig.colors.white,
-            }}>
+          <Text style={styles.producedByStyle}>
             <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
             {item?.brand}
           </Text>
@@ -67,29 +53,15 @@ const ProductDetailsScreen: React.FC = props => {
 
         <Line lineHeight={1} />
         <View>
-          <Text
-            style={{
-              paddingVertical: 5,
-              fontWeight: '600',
-              fontSize: appConfig.fontSizes.medium + 2,
-              color: appConfig.colors.blueSecondary,
-            }}>
-            Description
-          </Text>
+          <Text style={styles.subHeadingStyle}>Description</Text>
         </View>
         <View>
-          <Text
-            style={{
-              paddingVertical: 5,
-              fontWeight: '600',
-              fontSize: appConfig.fontSizes.medium,
-              color: appConfig.colors.white,
-            }}>
-            {item?.description}
-          </Text>
+          <Text style={styles.descriptiongTextStyle}>{item?.description}</Text>
         </View>
-
         <Line lineHeight={0.75} />
+        <View>
+          <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
+        </View>
       </View>
     </View>
   );
@@ -101,6 +73,30 @@ const styles = StyleSheet.create({
     backgroundColor: appConfig.colors.dark,
   },
   contentStyle: {flex: 1, margin: 10},
+  itemTitleStlye: {
+    fontSize: appConfig.fontSizes.large,
+    fontWeight: '600',
+    fontStyle: 'normal',
+    color: appConfig.colors.blueSecondary,
+  },
+  producedByStyle: {
+    paddingVertical: 5,
+    fontWeight: '600',
+    fontSize: appConfig.fontSizes.medium + 2,
+    color: appConfig.colors.white,
+  },
+  descriptiongTextStyle: {
+    paddingVertical: 5,
+    fontWeight: '600',
+    fontSize: appConfig.fontSizes.medium,
+    color: appConfig.colors.white,
+  },
+  subHeadingStyle: {
+    paddingVertical: 5,
+    fontWeight: '600',
+    fontSize: appConfig.fontSizes.medium + 2,
+    color: appConfig.colors.blueSecondary,
+  },
 });
 
 export default ProductDetailsScreen;
