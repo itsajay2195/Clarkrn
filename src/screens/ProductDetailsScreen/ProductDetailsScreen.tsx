@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
 import {ProductContext} from '../../context/ProductContext';
+import Discount from './Components/Discount';
+import Line from '../../components/Line';
 
 interface ItemProps {
   id?: string;
@@ -15,6 +17,7 @@ interface ItemProps {
   rating?: string;
   description?: string;
   stock?: string;
+  discountPercentage?: number;
   images: [];
 }
 
@@ -28,11 +31,64 @@ const ProductDetailsScreen: React.FC = props => {
     setItem(itemDetails[0]);
   }, [getData, id]);
 
+  console.log('item details', item);
+
   return (
     <View style={styles.container}>
       <Header />
       <ImageCarousel images={item?.images} />
-      <View style={styles.contentStyle}></View>
+      <View style={styles.contentStyle}>
+        <View style={{flexDirection: 'row'}}>
+          <Text
+            style={{
+              fontSize: appConfig.fontSizes.large,
+              fontWeight: '600',
+              fontStyle: 'normal',
+              color: appConfig.colors.blueSecondary,
+            }}>
+            {item?.title}
+          </Text>
+          <Discount percentage={item?.discountPercentage} />
+        </View>
+        <View>
+          <Text
+            style={{
+              paddingVertical: 5,
+              fontWeight: '600',
+              fontSize: appConfig.fontSizes.medium + 2,
+              color: appConfig.colors.white,
+            }}>
+            <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
+            {item?.brand}
+          </Text>
+        </View>
+
+        <Line lineHeight={1} />
+        <View>
+          <Text
+            style={{
+              paddingVertical: 5,
+              fontWeight: '600',
+              fontSize: appConfig.fontSizes.medium + 2,
+              color: appConfig.colors.blueSecondary,
+            }}>
+            Description
+          </Text>
+        </View>
+        <View>
+          <Text
+            style={{
+              paddingVertical: 5,
+              fontWeight: '600',
+              fontSize: appConfig.fontSizes.medium,
+              color: appConfig.colors.white,
+            }}>
+            {item?.description}
+          </Text>
+        </View>
+
+        <Line lineHeight={0.75} />
+      </View>
     </View>
   );
 };

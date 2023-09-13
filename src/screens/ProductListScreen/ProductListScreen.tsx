@@ -53,7 +53,9 @@ const ProductListScreen: React.FC = () => {
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      if (currentPage * itemsPerPage > 80) return;
+      if (currentPage * itemsPerPage > 80) {
+        return;
+      }
       const response = await fetchProducts(currentPage * itemsPerPage);
       setData(response);
     } catch (error) {
