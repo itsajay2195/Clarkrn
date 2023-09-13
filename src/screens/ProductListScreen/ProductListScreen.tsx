@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -30,7 +30,9 @@ const ProductListScreen: React.FC = () => {
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const {data, setData, loading, setLoading} = React.useContext(ProductContext);
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const itemsPerPage = 20; // Number of items per page
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -48,17 +50,19 @@ const ProductListScreen: React.FC = () => {
     fetchData();
   }, [setData, setLoading]);
 
-  const onRefresh = async () => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
     try {
-      const response = await fetchProducts();
+      if (currentPage * itemsPerPage > 80) return;
+      const response = await fetchProducts(currentPage * itemsPerPage);
       setData(response);
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
       setRefreshing(false);
+      setCurrentPage(prev => prev + 1);
     }
-  };
+  }, [currentPage, setData]);
 
   return (
     <View style={styles.container}>
