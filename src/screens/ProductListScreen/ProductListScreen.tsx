@@ -6,6 +6,7 @@ import {
   Image,
   StatusBar,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import appConfig from '../../styles/theme';
 import ProductListItem from './components/ProductListItem';
@@ -29,6 +30,7 @@ const ProductListScreen: React.FC = () => {
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const {data, setData, loading, setLoading} = React.useContext(ProductContext);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +47,18 @@ const ProductListScreen: React.FC = () => {
 
     fetchData();
   }, [setData, setLoading]);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const response = await fetchProducts();
+      setData(response);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -70,6 +84,13 @@ const ProductListScreen: React.FC = () => {
           renderItem={({item, index}) => (
             <ProductListItem item={item} index={index} scrollY={scrollY} />
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={[appConfig.colors.blue]}
+            />
+          }
         />
       )}
     </View>

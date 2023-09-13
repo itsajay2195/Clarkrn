@@ -32,7 +32,7 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
   scrollY,
 }) => {
   const inputRange = [-1, 0, 90 * index, 90 * (index + 2)];
-  const opacityInputRange = [-1, 0, 90 * index, 90 * (index + 1.25)];
+  const opacityInputRange = [-1, 0, 90 * index, 90 * (index + 2.5)];
 
   const scale = scrollY.interpolate({
     inputRange,
