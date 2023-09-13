@@ -33,8 +33,6 @@ const ProductDetailsScreen: React.FC = props => {
     setItem(itemDetails[0]);
   }, [getData, id]);
 
-  console.log('item details', item);
-
   return (
     <View style={styles.container}>
       <Header />

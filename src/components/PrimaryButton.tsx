@@ -1,17 +1,11 @@
-import {
-  Text,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
+import {Text, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import React from 'react';
 import appConfig from '../styles/theme';
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
   title?: string;
-  containerStyle?: ViewStyle;
-  textStyle?: TextStyle;
+  containerStyle?: any;
+  textStyle?: any;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -23,7 +17,6 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   const styles = React.useMemo(() => {
     return {
       container: {
-        ...containerStyle,
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
@@ -31,12 +24,13 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
         borderRadius: 8,
         paddingHorizontal: 5,
         paddingVertical: 14,
+        ...containerStyle,
       },
       textStyle: {
-        ...textStyle,
         color: appConfig.colors.white,
         fontSize: appConfig.fontSizes.medium,
         fontWeight: 'bold',
+        ...textStyle,
       },
     };
   }, [containerStyle, textStyle]);
