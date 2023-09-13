@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
@@ -7,6 +7,7 @@ import {ProductContext} from '../../context/ProductContext';
 import Discount from './Components/Discount';
 import Line from '../../components/Line';
 import Rating from '../../components/Rating';
+import PrimaryButton from '../../components/PrimaryButton';
 
 interface ItemProps {
   id?: string;
@@ -62,6 +63,14 @@ const ProductDetailsScreen: React.FC = props => {
         <View>
           <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
         </View>
+        <View style={styles.addToCarBtnWrapper}>
+          <PrimaryButton title={'Add to cart'} />
+        </View>
+        <View>
+          <Text style={styles.unitText}>
+            Hurry up! only {item?.stock} units left.
+          </Text>
+        </View>
       </View>
     </View>
   );
@@ -97,6 +106,12 @@ const styles = StyleSheet.create({
     fontSize: appConfig.fontSizes.medium + 2,
     color: appConfig.colors.blueSecondary,
   },
+  addToCarBtnWrapper: {
+    paddingVertical: 5,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  unitText: {color: appConfig.colors.red, fontWeight: '600'},
 });
 
 export default ProductDetailsScreen;
