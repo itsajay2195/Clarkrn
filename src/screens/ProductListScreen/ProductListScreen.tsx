@@ -35,6 +35,13 @@ const ProductListScreen: React.FC = () => {
   const itemsPerPage = 20; // Number of items per page
 
   React.useEffect(() => {
+    // Set the status bar color
+    if (appConfig.os.android) {
+      StatusBar.setBackgroundColor(appConfig.colors.dark);
+    }
+  }, []);
+
+  React.useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);

@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
@@ -12,6 +12,7 @@ interface Colors {
   black: string;
   red: string;
   dark: string;
+  light: string;
 }
 
 interface FontSizes {
@@ -26,10 +27,16 @@ interface WindowDimensions {
   width: number;
 }
 
+interface OsConfig {
+  ios: boolean;
+  android: boolean;
+}
+
 interface AppConfig {
   colors: Colors;
   fontSizes: FontSizes;
   window: WindowDimensions;
+  os: OsConfig;
 }
 
 const appConfig: AppConfig = {
@@ -42,6 +49,7 @@ const appConfig: AppConfig = {
     blueSecondary: '#8FB1CC',
     black: '#000000',
     red: '#ff0000',
+    light: '#f2f2f2',
     dark: '#343a40',
   },
   fontSizes: {
@@ -53,6 +61,10 @@ const appConfig: AppConfig = {
   window: {
     height,
     width,
+  },
+  os: {
+    ios: Platform.OS === 'ios',
+    android: Platform.OS === 'android',
   },
 };
 

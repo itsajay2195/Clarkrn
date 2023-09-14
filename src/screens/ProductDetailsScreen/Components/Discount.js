@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     padding: 5,
     marginHorizontal: 10,
     borderRadius: 10,
+    maxHeight: 30,
+    justifyContent: 'center',
   },
   textStyle: {fontWeight: 'bold', color: appConfig.colors.white},
 });

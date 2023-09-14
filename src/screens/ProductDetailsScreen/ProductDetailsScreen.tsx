@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
@@ -34,49 +42,58 @@ const ProductDetailsScreen: React.FC = props => {
   }, [getData, id]);
 
   return (
-    <View style={styles.container}>
-      <Header />
-      <ImageCarousel images={item?.images} />
-      <View style={styles.contentStyle}>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={styles.itemTitleStlye}>{item?.title}</Text>
-          <Discount percentage={item?.discountPercentage} />
-        </View>
-        <Rating rating={item?.rating} />
-        <View>
-          <Text style={styles.producedByStyle}>
-            <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
-            {item?.brand}
-          </Text>
-        </View>
+    <View style={styles.androidSafeArea}>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Header />
+        <ImageCarousel images={item?.images} />
+        <View style={styles.contentStyle}>
+          <View style={{flexDirection: 'row'}}>
+            <View
+              style={{display: 'flex', maxWidth: appConfig.window.width / 1.3}}>
+              <Text numberOfLines={2} style={styles.itemTitleStlye}>
+                {item?.title}
+              </Text>
+            </View>
+            <Discount percentage={item?.discountPercentage} />
+          </View>
+          <Rating rating={item?.rating} />
+          <View>
+            <Text style={styles.producedByStyle}>
+              <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
+              {item?.brand}
+            </Text>
+          </View>
 
-        <Line lineHeight={1} />
-        <View>
-          <Text style={styles.subHeadingStyle}>Description</Text>
+          <Line lineHeight={1} />
+          <View>
+            <Text style={styles.subHeadingStyle}>Description</Text>
+          </View>
+          <View>
+            <Text style={styles.descriptiongTextStyle}>
+              {item?.description}
+            </Text>
+          </View>
+          <Line lineHeight={0.75} />
+          <View>
+            <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
+          </View>
+          <View style={styles.addToCarBtnWrapper}>
+            <PrimaryButton title={'Add to cart'} />
+          </View>
+          <View>
+            <Text style={styles.unitText}>
+              Hurry up! only {item?.stock} units left.
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.descriptiongTextStyle}>{item?.description}</Text>
-        </View>
-        <Line lineHeight={0.75} />
-        <View>
-          <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
-        </View>
-        <View style={styles.addToCarBtnWrapper}>
-          <PrimaryButton title={'Add to cart'} />
-        </View>
-        <View>
-          <Text style={styles.unitText}>
-            Hurry up! only {item?.stock} units left.
-          </Text>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: appConfig.colors.dark,
   },
   contentStyle: {flex: 1, margin: 10},
@@ -110,6 +127,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   unitText: {color: appConfig.colors.red, fontWeight: '600'},
+  androidSafeArea: {
+    flex: 1,
+    backgroundColor: appConfig.colors.dark,
+    paddingTop: appConfig.os.android ? StatusBar.currentHeight - 8 : 0,
+  },
 });
 
 export default ProductDetailsScreen;

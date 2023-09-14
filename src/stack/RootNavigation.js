@@ -6,6 +6,7 @@ import React from 'react';
 import {SCREEN_CONSTANTS} from '../constants/ScreenConstants';
 import ProductListScreen from '../screens/ProductListScreen/ProductListScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen/ProductDetailsScreen';
+import appConfig from '../styles/theme';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,8 +15,8 @@ const RootNavigation = () => {
     <NavigationContainer>
       <SafeAreaProvider>
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? -64 : 20}
+          behavior={appConfig.os.ios ? 'padding' : 'height'}
+          keyboardVerticalOffset={appConfig.os.ios ? -64 : 20}
           style={containerStyle}>
           <Stack.Navigator>
             <Stack.Screen

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     width: appConfig.window.width,
-    height: 250,
+    height: appConfig.window.height / 4,
     resizeMode: 'cover',
   },
   dotView: {

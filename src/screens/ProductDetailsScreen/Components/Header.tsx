@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, Image, TouchableOpacity, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  View,
+  Text,
+  Platform,
+} from 'react-native';
 import appConfig from '../../../styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import CartButton from './CartButton';
@@ -38,6 +45,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: appConfig.colors.dark,
     alignItems: 'center',
+    marginTop: Platform.OS === 'ios' ? 10 : 0,
   },
   backBtnWrapper: {
     flex: 0.2,
