@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import {
   StyleSheet,
   View,
@@ -14,6 +14,13 @@ import {ProductContext} from '../../context/ProductContext';
 import {fetchProducts} from '../../api/productsApi';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SearchBar from '../../components/SearchBar';
+import productListReducer from './reducer/productListReducer';
+import {
+  SET_SEARCH_DATA,
+  SET_REFRESHING,
+  SET_SEARCH_QUERY,
+  SET_CURRENT_PAGE,
+} from './reducer/actionTypes';
 
 const BG_HOME =
   'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -28,13 +35,26 @@ interface Product {
   images: [];
 }
 
+const initialState = {
+  searchData: null,
+  refreshing: false,
+  searchQuery: '',
+  currentPage: 1,
+};
+
 const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
   const scrollY = React.useRef(new Animated.Value(0)).current;
-
+  const [state, dispatch] = useReducer(productListReducer, initialState);
   const {data, setData, loading, setLoading} = React.useContext(ProductContext);
-  const [refreshing, setRefreshing] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 20; // Number of items per page
+
+  const {searchData, currentPage, searchQuery, refreshing} = state;
+
+  React.useEffect(() => {
+    if (searchQuery.length === 0) {
+      dispatch({type: SET_SEARCH_DATA, payload: data});
+    }
+  }, [data, searchQuery]);
 
   React.useEffect(() => {
     // Set the status bar color
@@ -48,7 +68,8 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
       try {
         setLoading(true);
         const response = await fetchProducts();
-        setData(response);
+        setData(response?.products);
+        dispatch({type: SET_SEARCH_DATA, payload: response?.products});
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
@@ -60,20 +81,42 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
   }, [setData, setLoading]);
 
   const onRefresh = React.useCallback(async () => {
-    setRefreshing(true);
+    dispatch({type: SET_REFRESHING, payload: true});
     try {
       if (currentPage * itemsPerPage > 80) {
         return;
       }
       const response = await fetchProducts(currentPage * itemsPerPage);
-      setData(response);
+      setData(response?.products);
+      dispatch({type: SET_SEARCH_DATA, payload: response?.products});
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
-      setRefreshing(false);
-      setCurrentPage(prev => prev + 1);
+      dispatch({type: SET_REFRESHING, payload: false});
+      dispatch({type: SET_CURRENT_PAGE, payload: currentPage + 1});
     }
   }, [currentPage, setData]);
+
+  const handleSearch = React.useCallback(
+    (text: string) => {
+      // Convert the search input to lowercase
+      const searchTextLower = text.toLowerCase();
+      dispatch({type: SET_SEARCH_QUERY, payload: text});
+
+      // Filter data based on lowercase titles and exact match
+      let searchResults = data.filter(item =>
+        item.title.toLowerCase().includes(searchTextLower),
+      );
+
+      dispatch({type: SET_SEARCH_DATA, payload: searchResults});
+    },
+    [data],
+  );
+
+  const resetSearch = React.useCallback(() => {
+    dispatch({type: SET_SEARCH_QUERY, payload: ''});
+    dispatch({type: SET_SEARCH_DATA, payload: data});
+  }, [data]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -82,14 +125,18 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
         style={StyleSheet.absoluteFillObject}
         blurRadius={80}
       />
-      <SearchBar />
+      <SearchBar
+        textValue={searchQuery}
+        onChangeText={handleSearch}
+        resetSearch={resetSearch}
+      />
       {loading ? (
         <View style={styles.loaderWrapper}>
           <ActivityIndicator size={'large'} color={appConfig.colors.blue} />
         </View>
       ) : (
         <Animated.FlatList
-          data={data?.products as unknown as Product[]}
+          data={searchData as unknown as Product[]}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollY}}}],
             {useNativeDriver: true},
