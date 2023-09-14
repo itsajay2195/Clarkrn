@@ -25,7 +25,7 @@ interface ItemProps {
 
 const ProductDetailsScreen: React.FC = props => {
   const {id} = props.route.params;
-  const {getData} = React.useContext(ProductContext);
+  const {getData, cart, setCart} = React.useContext(ProductContext);
   const [item, setItem] = React.useState<ItemProps | null>(null);
 
   React.useEffect(() => {
@@ -36,7 +36,7 @@ const ProductDetailsScreen: React.FC = props => {
   return (
     <View style={styles.androidSafeArea}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Header />
+        <Header cartCount={cart} />
         <ImageCarousel images={item?.images} />
         <View style={styles.contentStyle}>
           <View style={{flexDirection: 'row'}}>

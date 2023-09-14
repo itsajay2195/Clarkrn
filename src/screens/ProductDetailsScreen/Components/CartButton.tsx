@@ -1,9 +1,12 @@
-import {StyleSheet, Text, Image, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import appConfig from '../../../styles/theme';
 import Icon from 'react-native-vector-icons/Feather';
 
-const CartButton = () => {
+interface CartProps {
+  cartCount?: Object;
+}
+const CartButton: React.FC<CartProps> = React.memo(({cartCount}) => {
   return (
     <View style={styles.container}>
       <Icon
@@ -11,12 +14,14 @@ const CartButton = () => {
         name="shopping-bag"
         color={appConfig.colors.white}
       />
-      <View style={styles.countStyle}>
-        {/* <Text style={styles.countTextStyle}>1</Text> */}
-      </View>
+      {cartCount ? (
+        <View style={styles.countStyle}>
+          {/* <Text style={styles.countTextStyle}>1</Text> */}
+        </View>
+      ) : null}
     </View>
   );
-};
+});
 
 export default CartButton;
 

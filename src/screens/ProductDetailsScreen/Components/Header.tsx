@@ -12,7 +12,11 @@ import {useNavigation} from '@react-navigation/native';
 import CartButton from './CartButton';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  cartCount?: Object;
+}
+
+const Header: React.FC<HeaderProps> = ({cartCount}) => {
   const navigation = useNavigation(); // Get navigation from the hook
 
   return (
@@ -32,7 +36,7 @@ const Header: React.FC = () => {
         <Text style={styles.titlTextStyle}>C L A R K</Text>
       </View>
       <View style={styles.cartWrapper}>
-        <CartButton />
+        <CartButton cartCount={cartCount} />
       </View>
     </View>
   );

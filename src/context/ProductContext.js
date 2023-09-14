@@ -5,6 +5,7 @@ export const ProductContext = createContext();
 export const ProductContextProvider = ({children}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState(null);
 
   const getData = id => data?.products.filter(item => item.id === id);
 
@@ -18,6 +19,8 @@ export const ProductContextProvider = ({children}) => {
         loading,
         setLoading,
         getData,
+        cart,
+        setCart,
       }}>
       {children}
     </ProductContext.Provider>
