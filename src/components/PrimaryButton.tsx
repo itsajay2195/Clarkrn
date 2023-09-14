@@ -9,41 +9,43 @@ interface PrimaryButtonProps extends TouchableOpacityProps {
   disabled?: boolean;
 }
 
-const PrimaryButton: React.FC<PrimaryButtonProps> = React.memo(
-  function PrimaryButton({
-    onPress,
-    title,
-    containerStyle,
-    textStyle,
-    disabled,
-  }) {
-    const styles = React.useMemo(() => {
-      return {
-        container: {
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          opacity: disabled ? 0.5 : 1,
-          backgroundColor: appConfig.colors.black,
-          borderRadius: 8,
-          paddingHorizontal: 5,
-          paddingVertical: 14,
-          ...containerStyle,
-        },
-        textStyle: {
-          color: appConfig.colors.white,
-          fontSize: appConfig.fontSizes.medium,
-          fontWeight: 'bold',
-          ...textStyle,
-        },
-      };
-    }, [containerStyle, disabled, textStyle]);
-    return (
-      <TouchableOpacity style={styles.container} onPress={onPress}>
-        <Text style={styles.textStyle}>{title || 'Add to cart'}</Text>
-      </TouchableOpacity>
-    );
-  },
-);
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
+  onPress,
+  title,
+  containerStyle,
+  textStyle,
+  disabled,
+}) => {
+  console.log('calld');
+  const styles = React.useMemo(() => {
+    return {
+      container: {
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: disabled ? 0.5 : 1,
+        backgroundColor: appConfig.colors.black,
+        borderRadius: 8,
+        paddingHorizontal: 5,
+        paddingVertical: 14,
+        ...containerStyle,
+      },
+      textStyle: {
+        color: appConfig.colors.white,
+        fontSize: appConfig.fontSizes.medium,
+        fontWeight: 'bold',
+        ...textStyle,
+      },
+    };
+  }, [containerStyle, disabled, textStyle]);
+  return (
+    <TouchableOpacity
+      disabled={disabled}
+      style={styles.container}
+      onPress={onPress}>
+      <Text style={styles.textStyle}>{title || 'Add to cart'}</Text>
+    </TouchableOpacity>
+  );
+};
 
 export default PrimaryButton;

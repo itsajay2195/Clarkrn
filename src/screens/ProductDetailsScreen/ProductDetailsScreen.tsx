@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  ScrollView,
-  StatusBar,
-  ActivityIndicator,
-} from 'react-native';
+import {View, StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
@@ -35,13 +28,11 @@ const ProductDetailsScreen: React.FC = props => {
   const {getData, cart, setCart} = React.useContext(ProductContext);
   const [item, setItem] = useState<ItemProps | null>(null);
   const [disableClick, setDisableClick] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     let itemDetails = getData(id);
     const selectedItem = itemDetails[0];
     setItem(selectedItem);
-    setLoading(false);
   }, [getData, id]);
 
   const handleAddToCartPress = React.useCallback(() => {
@@ -91,7 +82,7 @@ const ProductDetailsScreen: React.FC = props => {
             <View style={styles.addToCarBtnWrapper}>
               <PrimaryButton
                 title={'Add to cart'}
-                onPress={() => handleAddToCartPress}
+                onPress={handleAddToCartPress}
                 disabled={disableClick}
               />
             </View>
