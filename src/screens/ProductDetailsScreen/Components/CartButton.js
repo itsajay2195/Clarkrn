@@ -1,16 +1,18 @@
 import {StyleSheet, Text, Image, View} from 'react-native';
 import React from 'react';
 import appConfig from '../../../styles/theme';
+import Icon from 'react-native-vector-icons/Feather';
 
 const CartButton = () => {
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.imageStyle}
-        source={require('../../../assets/icons/cart.png')}
+      <Icon
+        size={appConfig.fontSizes.large}
+        name="shopping-bag"
+        color={appConfig.colors.white}
       />
       <View style={styles.countStyle}>
-        <Text style={styles.countTextStyle}>1</Text>
+        {/* <Text style={styles.countTextStyle}>1</Text> */}
       </View>
     </View>
   );

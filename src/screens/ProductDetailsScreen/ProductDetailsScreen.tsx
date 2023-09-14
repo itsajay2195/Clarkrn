@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  Platform,
-  StatusBar,
-} from 'react-native';
+import {View, StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
@@ -130,7 +122,7 @@ const styles = StyleSheet.create({
   androidSafeArea: {
     flex: 1,
     backgroundColor: appConfig.colors.dark,
-    paddingTop: appConfig.os.android ? StatusBar.currentHeight - 8 : 0,
+    paddingTop: appConfig.os.android ? StatusBar.currentHeight : 4,
   },
 });
 

@@ -10,6 +10,7 @@ import {
 import appConfig from '../../../styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import CartButton from './CartButton';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const Header: React.FC = () => {
   const navigation = useNavigation(); // Get navigation from the hook
@@ -21,9 +22,10 @@ const Header: React.FC = () => {
         onPress={() => {
           navigation.goBack();
         }}>
-        <Image
-          style={styles.imageStyle}
-          source={require('../../../assets/icons/angle-left.png')}
+        <Icon
+          size={appConfig.fontSizes.bannerText - 2}
+          name="angle-left"
+          color={appConfig.colors.black}
         />
       </TouchableOpacity>
       <View style={styles.titleWrapper}>
