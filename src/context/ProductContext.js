@@ -7,7 +7,7 @@ export const ProductContextProvider = ({children}) => {
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState(null);
 
-  const getData = id => data?.products.filter(item => item.id === id);
+  const getData = id => data.filter(item => item.id === id);
 
   // Define any other state variables or functions you want to share
 
