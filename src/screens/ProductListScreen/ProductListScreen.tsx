@@ -12,6 +12,7 @@ import appConfig from '../../styles/theme';
 import ProductListItem from './components/ProductListItem';
 import {ProductContext} from '../../context/ProductContext';
 import {fetchProducts} from '../../api/productsApi';
+import {useIsFocused} from '@react-navigation/native';
 
 const BG_HOME =
   'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -26,14 +27,22 @@ interface Product {
   images: [];
 }
 
-const ProductListScreen: React.FC = () => {
+const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
   const {data, setData, loading, setLoading} = React.useContext(ProductContext);
   const [refreshing, setRefreshing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 20; // Number of items per page
+  const isFocused = useIsFocused();
 
+  React.useEffect(() => {
+    if (isFocused) {
+      console.log('the screen is focused');
+      // Screen is currently focused
+      // You can perform actions specific to a focused screen here
+    }
+  }, [isFocused]);
   React.useEffect(() => {
     // Set the status bar color
     if (appConfig.os.android) {
@@ -108,7 +117,7 @@ const ProductListScreen: React.FC = () => {
       )}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   contentContainerStyle: {

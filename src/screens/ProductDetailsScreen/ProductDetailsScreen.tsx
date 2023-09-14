@@ -1,5 +1,12 @@
-import React from 'react';
-import {View, StyleSheet, Text, ScrollView, StatusBar} from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  StatusBar,
+  ActivityIndicator,
+} from 'react-native';
 import appConfig from '../../styles/theme';
 import ImageCarousel from './Components/ImageCarousel';
 import Header from './Components/Header';
@@ -26,59 +33,76 @@ interface ItemProps {
 const ProductDetailsScreen: React.FC = props => {
   const {id} = props.route.params;
   const {getData, cart, setCart} = React.useContext(ProductContext);
-  const [item, setItem] = React.useState<ItemProps | null>(null);
+  const [item, setItem] = useState<ItemProps | null>(null);
+  const [disableClick, setDisableClick] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     let itemDetails = getData(id);
-    setItem(itemDetails[0]);
+    const selectedItem = itemDetails[0];
+    setItem(selectedItem);
+    setLoading(false);
   }, [getData, id]);
 
+  const handleAddToCartPress = React.useCallback(() => {
+    setCart(item);
+    setDisableClick(true);
+  }, [item, setCart]);
   return (
     <View style={styles.androidSafeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Header cartCount={cart} />
-        <ImageCarousel images={item?.images} />
-        <View style={styles.contentStyle}>
-          <View style={{flexDirection: 'row'}}>
-            <View
-              style={{display: 'flex', maxWidth: appConfig.window.width / 1.3}}>
-              <Text numberOfLines={2} style={styles.itemTitleStlye}>
-                {item?.title}
+      {item ? (
+        <ScrollView contentContainerStyle={styles.container}>
+          <Header cartCount={cart} />
+          <ImageCarousel images={item?.images} />
+          <View style={styles.contentStyle}>
+            <View style={{flexDirection: 'row'}}>
+              <View
+                style={{
+                  display: 'flex',
+                  maxWidth: appConfig.window.width / 1.3,
+                }}>
+                <Text numberOfLines={2} style={styles.itemTitleStlye}>
+                  {item?.title}
+                </Text>
+              </View>
+              <Discount percentage={item?.discountPercentage} />
+            </View>
+            <Rating rating={item?.rating} />
+            <View>
+              <Text style={styles.producedByStyle}>
+                <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
+                {item?.brand}
               </Text>
             </View>
-            <Discount percentage={item?.discountPercentage} />
-          </View>
-          <Rating rating={item?.rating} />
-          <View>
-            <Text style={styles.producedByStyle}>
-              <Text style={{fontSize: appConfig.fontSizes.small}}>by </Text>
-              {item?.brand}
-            </Text>
-          </View>
 
-          <Line lineHeight={1} />
-          <View>
-            <Text style={styles.subHeadingStyle}>Description</Text>
+            <Line lineHeight={1} />
+            <View>
+              <Text style={styles.subHeadingStyle}>Description</Text>
+            </View>
+            <View>
+              <Text style={styles.descriptiongTextStyle}>
+                {item?.description}
+              </Text>
+            </View>
+            <Line lineHeight={0.75} />
+            <View>
+              <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
+            </View>
+            <View style={styles.addToCarBtnWrapper}>
+              <PrimaryButton
+                title={'Add to cart'}
+                onPress={() => handleAddToCartPress}
+                disabled={disableClick}
+              />
+            </View>
+            <View>
+              <Text style={styles.unitText}>
+                Hurry up! only {item?.stock} units left.
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={styles.descriptiongTextStyle}>
-              {item?.description}
-            </Text>
-          </View>
-          <Line lineHeight={0.75} />
-          <View>
-            <Text style={styles.subHeadingStyle}>INR {item?.price}</Text>
-          </View>
-          <View style={styles.addToCarBtnWrapper}>
-            <PrimaryButton title={'Add to cart'} />
-          </View>
-          <View>
-            <Text style={styles.unitText}>
-              Hurry up! only {item?.stock} units left.
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      ) : null}
     </View>
   );
 };
