@@ -12,6 +12,8 @@ import appConfig from '../../styles/theme';
 import ProductListItem from './components/ProductListItem';
 import {ProductContext} from '../../context/ProductContext';
 import {fetchProducts} from '../../api/productsApi';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import SearchBar from '../../components/SearchBar';
 
 const BG_HOME =
   'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -74,13 +76,13 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
   }, [currentPage, setData]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
         source={{uri: BG_HOME}}
         style={StyleSheet.absoluteFillObject}
         blurRadius={80}
       />
-
+      <SearchBar />
       {loading ? (
         <View style={styles.loaderWrapper}>
           <ActivityIndicator size={'large'} color={appConfig.colors.blue} />
@@ -106,17 +108,20 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
           }
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 });
 
 const styles = StyleSheet.create({
   contentContainerStyle: {
     padding: 10,
-    paddingTop: StatusBar.currentHeight || 42,
   },
   loaderWrapper: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  container: {display: 'flex', flex: 1},
+  container: {
+    display: 'flex',
+    flex: 1,
+    paddingTop: appConfig.os.android ? StatusBar.currentHeight : 0,
+  },
 });
 
 export default ProductListScreen;

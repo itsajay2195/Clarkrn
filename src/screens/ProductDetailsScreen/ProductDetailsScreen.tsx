@@ -8,6 +8,7 @@ import Discount from './Components/Discount';
 import Line from '../../components/Line';
 import Rating from '../../components/Rating';
 import PrimaryButton from '../../components/PrimaryButton';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface ItemProps {
   id?: string;
@@ -40,7 +41,7 @@ const ProductDetailsScreen: React.FC = props => {
     setDisableClick(true);
   }, [item, setCart]);
   return (
-    <View style={styles.androidSafeArea}>
+    <SafeAreaView style={styles.androidSafeArea}>
       {item ? (
         <ScrollView contentContainerStyle={styles.container}>
           <Header cartCount={cart} />
@@ -94,7 +95,7 @@ const ProductDetailsScreen: React.FC = props => {
           </View>
         </ScrollView>
       ) : null}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -137,7 +138,7 @@ const styles = StyleSheet.create({
   androidSafeArea: {
     flex: 1,
     backgroundColor: appConfig.colors.dark,
-    paddingTop: appConfig.os.android ? StatusBar.currentHeight : 4,
+    paddingTop: appConfig.os.android ? StatusBar.currentHeight : 0,
   },
 });
 
