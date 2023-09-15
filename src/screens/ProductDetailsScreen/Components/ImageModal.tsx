@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: appConfig.colors.grey,
     justifyContent: 'center',
     alignItems: 'center',
-    top: 5,
+    top: 20,
     zIndex: 10,
   },
   contentContainer: {
