@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import appConfig from '../../../styles/theme';
 import {ImageCarouselProps} from '../../../types/propTypes';
+import ImageModal from './ImageModal';
 
 const viewConfigRef = {viewAreaCoveragePercentThreshold: 90};
 
@@ -41,7 +42,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
     const orientationChangeListener: EmitterSubscription =
       Dimensions.addEventListener('change', ({window}) => {
         setWindowDimensions(window);
-        console.log('Orientation changed', window.height, window.width);
       });
 
     return () => {
@@ -50,7 +50,9 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
   }, []);
 
   const renderItem = ({item}: {item: string}) => (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onLongPress={() => handleImageLongPress(item)}
+      onPress={() => (selectedImage ? setSelectedImage(null) : null)}>
       <Image
         resizeMethod="auto"
         source={{uri: item}}
@@ -93,6 +95,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
             ]}
           />
         ))}
+        <ImageModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          setSelectedImage={setSelectedImage}
+          selectedImage={selectedImage}
+        />
       </View>
     </View>
   );

@@ -68,3 +68,10 @@ export interface ProductListItemProps {
   index: number;
   scrollY: Animated.Value;
 }
+
+export interface ImageModalProps {
+  modalVisible: boolean;
+  setModalVisible: (visible: boolean) => void;
+  setSelectedImage: (image: string | null) => void;
+  selectedImage: string | null;
+}
