@@ -126,25 +126,27 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
           <ActivityIndicator size={'large'} color={appConfig.colors.blue} />
         </View>
       ) : (
-        <Animated.FlatList
-          data={searchData as unknown as ProductListProps[]}
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollY}}}],
-            {useNativeDriver: true},
-          )}
-          contentContainerStyle={styles.contentContainerStyle}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({item, index}) => (
-            <ProductListItem item={item} index={index} scrollY={scrollY} />
-          )}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              colors={[appConfig.colors.blue]}
-            />
-          }
-        />
+        <Animated.View>
+          <Animated.FlatList
+            data={searchData as unknown as ProductListProps[]}
+            onScroll={Animated.event(
+              [{nativeEvent: {contentOffset: {y: scrollY}}}],
+              {useNativeDriver: true},
+            )}
+            contentContainerStyle={styles.contentContainerStyle}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item, index}) => (
+              <ProductListItem item={item} index={index} scrollY={scrollY} />
+            )}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+                colors={[appConfig.colors.blue]}
+              />
+            }
+          />
+        </Animated.View>
       )}
     </SafeAreaView>
   );
@@ -153,6 +155,8 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
 const styles = StyleSheet.create({
   contentContainerStyle: {
     padding: 10,
+    paddingHorizontal: 20,
+    paddingBottom: 60,
   },
   loaderWrapper: {flex: 1, justifyContent: 'center', alignItems: 'center'},
   container: {
