@@ -23,7 +23,6 @@ import {
   SET_CURRENT_PAGE,
 } from './reducer/actionTypes';
 import {ProductListProps} from '../../types/propTypes';
-import ListEmptyComponent from './components/ListEmptyComponent';
 import listEmptyComponent from './components/ListEmptyComponent';
 
 const BG_HOME =
@@ -114,6 +113,7 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* backgroundImage */}
       <Image
         source={{uri: BG_HOME}}
         style={StyleSheet.absoluteFillObject}

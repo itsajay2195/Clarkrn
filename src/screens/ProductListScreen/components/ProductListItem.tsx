@@ -46,19 +46,19 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
 
       onPanResponderMove: (event, gestureState) => {
         if (Math.abs(gestureState.dx) > 10 && swipeable) {
-          // Start the swipe animation when the user moves more than 10 pixels horizontally
+          // Start the swipe animation when the user moves more than 20 pixels horizontally
           setSwipeable(false); // Disable further animations
           const movement = gestureState.dx > 0 ? 20 : 0; // Adjust the movement distance as needed
           Animated.timing(translateX, {
             toValue: movement,
-            duration: 0, // Set a short duration for an instant response
+            duration: 0,
             useNativeDriver: true,
           }).start();
         }
       },
       onPanResponderRelease: (_, gestureState) => {
-        // Determine the swipe direction (left or right)
-        const swipeThreshold = 100; // You can adjust this threshold
+        // swipe direction  is restricted to right side only.
+        const swipeThreshold = 100; //threshold value
         if (gestureState.dx > swipeThreshold) {
           // User swiped right, navigate to details screen
           navigation.navigate(SCREEN_CONSTANTS.productDetails, {id: item.id});
