@@ -1,5 +1,5 @@
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {KeyboardAvoidingView, Platform} from 'react-native';
+import {KeyboardAvoidingView} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
@@ -16,7 +16,7 @@ const RootNavigation = () => {
       <SafeAreaProvider>
         <KeyboardAvoidingView
           behavior={appConfig.os.ios ? 'padding' : 'height'}
-          keyboardVerticalOffset={appConfig.os.ios ? -64 : 20}
+          keyboardVerticalOffset={appConfig.os.ios ? -64 : 0}
           style={containerStyle}>
           <Stack.Navigator>
             <Stack.Screen

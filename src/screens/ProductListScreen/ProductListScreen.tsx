@@ -7,6 +7,7 @@ import {
   StatusBar,
   ActivityIndicator,
   RefreshControl,
+  Text,
 } from 'react-native';
 import appConfig from '../../styles/theme';
 import ProductListItem from './components/ProductListItem';
@@ -22,6 +23,8 @@ import {
   SET_CURRENT_PAGE,
 } from './reducer/actionTypes';
 import {ProductListProps} from '../../types/propTypes';
+import ListEmptyComponent from './components/ListEmptyComponent';
+import listEmptyComponent from './components/ListEmptyComponent';
 
 const BG_HOME =
   'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
@@ -145,6 +148,7 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
                 colors={[appConfig.colors.blue]}
               />
             }
+            ListEmptyComponent={listEmptyComponent}
           />
         </Animated.View>
       )}
@@ -163,6 +167,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     paddingTop: appConfig.os.android ? StatusBar.currentHeight : 0,
+    backgroundColor: appConfig.colors.dark,
   },
 });
 
