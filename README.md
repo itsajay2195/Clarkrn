@@ -70,3 +70,5 @@ This template follows a very simple project structure:
   - `App.js`: Main component that starts your whole app.
   - `index.js`: Entry point of your application as per React-Native standards.
 
+![ezgif com-video-to-gif (2)](https://github.com/itsajay2195/Clarkrn/assets/47854133/7f3970d3-e4f2-4d76-8137-e965ec890370)
+
