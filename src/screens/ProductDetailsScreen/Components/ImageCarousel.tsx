@@ -1,18 +1,26 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   Image,
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
+  EmitterSubscription,
 } from 'react-native';
 import appConfig from '../../../styles/theme';
 import {ImageCarouselProps} from '../../../types/propTypes';
 
 const viewConfigRef = {viewAreaCoveragePercentThreshold: 90};
+
 const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
-  const flatListRef = useRef<FlatList<any>>(null); // Change the FlatList type as needed
+  const [windowDimensions, setWindowDimensions] = useState(
+    Dimensions.get('window'),
+  );
+  const flatListRef = useRef<FlatList<any>>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const scrollToIndex = (index: number) => {
     flatListRef.current?.scrollToIndex({animated: true, index});
@@ -24,10 +32,35 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
     }
   });
 
+  const handleImageLongPress = (imageUri: string) => {
+    setSelectedImage(imageUri);
+    setModalVisible(true);
+  };
+
+  useEffect(() => {
+    const orientationChangeListener: EmitterSubscription =
+      Dimensions.addEventListener('change', ({window}) => {
+        setWindowDimensions(window);
+        console.log('Orientation changed', window.height, window.width);
+      });
+
+    return () => {
+      orientationChangeListener.remove();
+    };
+  }, []);
+
   const renderItem = ({item}: {item: string}) => (
-    <View>
-      <Image source={{uri: item}} style={styles.imageStyle} />
-    </View>
+    <TouchableOpacity>
+      <Image
+        resizeMethod="auto"
+        source={{uri: item}}
+        style={{
+          width: windowDimensions.width,
+          height: windowDimensions.height / 3,
+        }}
+        resizeMode="cover"
+      />
+    </TouchableOpacity>
   );
 
   return (
@@ -68,11 +101,6 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
 const styles = StyleSheet.create({
   carousel: {
     maxHeight: 250,
-  },
-  imageStyle: {
-    width: appConfig.window.width,
-    height: appConfig.window.height / 4,
-    resizeMode: 'cover',
   },
   dotView: {
     flexDirection: 'row',

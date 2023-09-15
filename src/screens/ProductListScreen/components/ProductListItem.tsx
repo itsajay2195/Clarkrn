@@ -11,6 +11,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {SCREEN_CONSTANTS} from '../../../constants/ScreenConstants';
 import {ProductListItemProps} from '../../../types/propTypes';
+import appConfig from '../../../styles/theme';
 
 const ProductListItem: React.FC<ProductListItemProps> = ({
   item,
@@ -176,6 +177,7 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: '700',
     fontSize: 16,
+    color: appConfig.colors.black,
   },
 });
 
