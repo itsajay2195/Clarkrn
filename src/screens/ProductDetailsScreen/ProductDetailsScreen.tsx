@@ -34,12 +34,8 @@ const ProductDetailsScreen: React.FC = props => {
           <Header cartCount={cart} />
           <ImageCarousel images={item?.images} />
           <View style={styles.contentStyle}>
-            <View style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  display: 'flex',
-                  maxWidth: appConfig.window.width / 1.3,
-                }}>
+            <View style={styles.titleandDiscountContainer}>
+              <View style={styles.titleWrapper}>
                 <Text numberOfLines={2} style={styles.itemTitleStlye}>
                   {item?.title}
                 </Text>
@@ -127,6 +123,11 @@ const styles = StyleSheet.create({
     backgroundColor: appConfig.colors.dark,
     paddingTop: appConfig.os.android ? StatusBar.currentHeight : 0,
   },
+  titleWrapper: {
+    display: 'flex',
+    maxWidth: appConfig.window.width / 1.3,
+  },
+  titleandDiscountContainer: {flexDirection: 'row'},
 });
 
 export default ProductDetailsScreen;
