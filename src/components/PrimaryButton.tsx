@@ -1,13 +1,7 @@
-import {Text, TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import appConfig from '../styles/theme';
-
-interface PrimaryButtonProps extends TouchableOpacityProps {
-  title?: string;
-  containerStyle?: any;
-  textStyle?: any;
-  disabled?: boolean;
-}
+import {PrimaryButtonProps} from '../types/propTypes';
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onPress,

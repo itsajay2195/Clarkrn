@@ -11,10 +11,7 @@ import appConfig from '../../../styles/theme';
 import {useNavigation} from '@react-navigation/native';
 import CartButton from './CartButton';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
-interface HeaderProps {
-  cartCount?: Object;
-}
+import {HeaderProps} from '../../../types/propTypes';
 
 const Header: React.FC<HeaderProps> = ({cartCount}) => {
   const navigation = useNavigation(); // Get navigation from the hook

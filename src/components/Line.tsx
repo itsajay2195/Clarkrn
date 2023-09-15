@@ -1,10 +1,7 @@
 import {View, ViewStyle} from 'react-native';
 import React from 'react';
 import appConfig from '../styles/theme';
-
-interface LineProps {
-  lineHeight?: number;
-}
+import {LineProps} from '../types/propTypes';
 
 const Line: React.FC<LineProps> = ({lineHeight}) => {
   const lineStyle: ViewStyle = React.useMemo(() => {

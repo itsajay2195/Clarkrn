@@ -21,19 +21,10 @@ import {
   SET_SEARCH_QUERY,
   SET_CURRENT_PAGE,
 } from './reducer/actionTypes';
+import {ProductListProps} from '../../types/propTypes';
 
 const BG_HOME =
   'https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
-
-interface Product {
-  id: string;
-  title: string;
-  brand: string;
-  thumbnail: string;
-  price: string;
-  category: string;
-  images: [];
-}
 
 const initialState = {
   searchData: null,
@@ -136,7 +127,7 @@ const ProductListScreen: React.FC = React.memo(function ProductListScreen() {
         </View>
       ) : (
         <Animated.FlatList
-          data={searchData as unknown as Product[]}
+          data={searchData as unknown as ProductListProps[]}
           onScroll={Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollY}}}],
             {useNativeDriver: true},

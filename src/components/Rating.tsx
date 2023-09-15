@@ -2,11 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import theme from '../styles/theme';
-
-interface RatingProps {
-  rating: number | any;
-  size?: number;
-}
+import {RatingProps} from '../types/propTypes';
 
 const Rating: React.FC<RatingProps> = ({rating, size}) => {
   const renderStars = () => {

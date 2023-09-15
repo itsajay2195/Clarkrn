@@ -9,20 +9,7 @@ import Line from '../../components/Line';
 import Rating from '../../components/Rating';
 import PrimaryButton from '../../components/PrimaryButton';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
-interface ItemProps {
-  id?: string;
-  title?: string;
-  brand?: string;
-  thumbnail?: string;
-  price?: string;
-  category?: string;
-  rating?: string;
-  description?: string;
-  stock?: string;
-  discountPercentage?: number;
-  images: [];
-}
+import {ItemProps} from '../../types/propTypes';
 
 const ProductDetailsScreen: React.FC = props => {
   const {id} = props.route.params;

@@ -2,10 +2,8 @@ import {StyleSheet, View} from 'react-native';
 import React from 'react';
 import appConfig from '../../../styles/theme';
 import Icon from 'react-native-vector-icons/Feather';
+import {CartProps} from '../../../types/propTypes';
 
-interface CartProps {
-  cartCount?: Object;
-}
 const CartButton: React.FC<CartProps> = React.memo(({cartCount}) => {
   return (
     <View style={styles.container}>

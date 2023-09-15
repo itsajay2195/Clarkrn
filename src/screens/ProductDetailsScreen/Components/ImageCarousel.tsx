@@ -7,10 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import appConfig from '../../../styles/theme';
+import {ImageCarouselProps} from '../../../types/propTypes';
 
-interface ImageCarouselProps {
-  images?: [];
-}
 const viewConfigRef = {viewAreaCoveragePercentThreshold: 90};
 const ImageCarousel: React.FC<ImageCarouselProps> = ({images}) => {
   const flatListRef = useRef<FlatList<any>>(null); // Change the FlatList type as needed

@@ -2,14 +2,8 @@
 
 import {TouchableOpacityProps, Animated} from 'react-native';
 
-export interface Product {
-  id: string;
-  title: string;
-  brand: string;
-  thumbnail: string;
-  price: string;
-  category: string;
-  images: [];
+export interface LineProps {
+  lineHeight?: number;
 }
 
 export type PrimaryButtonProps = TouchableOpacityProps & {
@@ -58,9 +52,8 @@ export interface ItemProps {
   images: [];
 }
 
-//product list
-
-export interface Product {
+//productList
+export interface ProductListProps {
   id: string;
   title: string;
   brand: string;
@@ -71,18 +64,7 @@ export interface Product {
 }
 
 export interface ProductListItemProps {
-  item: Product;
+  item: ProductListProps;
   index: number;
   scrollY: Animated.Value;
-}
-
-//productList
-export interface Product {
-  id: string;
-  title: string;
-  brand: string;
-  thumbnail: string;
-  price: string;
-  category: string;
-  images: [];
 }

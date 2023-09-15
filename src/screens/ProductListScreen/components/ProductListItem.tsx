@@ -9,22 +9,7 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {SCREEN_CONSTANTS} from '../../../constants/ScreenConstants';
-
-interface Product {
-  id: string;
-  title: string;
-  brand: string;
-  thumbnail: string;
-  price: string;
-  category: string;
-  images: [];
-}
-
-interface ProductListItemProps {
-  item: Product;
-  index: number;
-  scrollY: Animated.Value;
-}
+import {ProductListItemProps} from '../../../types/propTypes';
 
 const ProductListItem: React.FC<ProductListItemProps> = ({
   item,

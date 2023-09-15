@@ -2,13 +2,7 @@ import React, {FC} from 'react';
 import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import appConfig from '../styles/theme';
-
-interface SearchBarProps {
-  placeholder?: string;
-  textValue: string;
-  onChangeText: (text: string) => void;
-  resetSearch: () => void;
-}
+import {SearchBarProps} from '../types/propTypes';
 
 const SearchBar: FC<SearchBarProps> = ({
   placeholder,
