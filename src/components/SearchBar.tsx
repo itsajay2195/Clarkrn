@@ -30,7 +30,12 @@ const SearchBar: FC<SearchBarProps> = ({
 export default SearchBar;
 
 const styles = StyleSheet.create({
-  textInputStyles: {fontSize: 16, padding: 6, width: '80%'},
+  textInputStyles: {
+    fontSize: 16,
+    padding: 6,
+    width: '80%',
+    color: appConfig.colors.black,
+  },
   resetSearchWrapper: {
     flex: 1,
     justifyContent: 'center',
