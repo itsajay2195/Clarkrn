@@ -10,7 +10,6 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   textStyle,
   disabled,
 }) => {
-  console.log('calld');
   const styles = React.useMemo(() => {
     return {
       container: {
