@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import {SCREEN_CONSTANTS} from '../../../constants/ScreenConstants';
 import {ProductListItemProps} from '../../../types/propTypes';
 import appConfig from '../../../styles/theme';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 const ProductListItem: React.FC<ProductListItemProps> = ({
   item,
@@ -118,6 +119,13 @@ const ProductListItem: React.FC<ProductListItemProps> = ({
         <View style={styles.priceContainer}>
           <Text style={styles.price}>₹ {item.price}</Text>
         </View>
+        <View style={styles.swipeIconWrapper}>
+          <Icon
+            size={appConfig.fontSizes.medium}
+            name="chevron-right"
+            color={appConfig.colors.black}
+          />
+        </View>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -179,6 +187,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: appConfig.colors.black,
   },
+  swipeIconWrapper: {justifyContent: 'center', alignItems: 'center'},
 });
 
 export default ProductListItem;
