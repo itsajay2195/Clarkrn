@@ -1,79 +1,72 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# My Clark React-Native Assignment
 
-# Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Prerequisites
 
-## Step 1: Start the Metro Server
+- [Node.js > 12](https://nodejs.org) and npm (Recommended: Use [nvm](https://github.com/nvm-sh/nvm))
+- [Watchman](https://facebook.github.io/watchman)
+- [Xcode 12](https://developer.apple.com/xcode)
+- [Cocoapods 1.10.1](https://cocoapods.org)
+- [JDK > 11](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- [Android Studio and Android SDK](https://developer.android.com/studio)
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Base dependencies
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- [react-navigation](https://reactnavigation.org/) navigation library.
+- [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons).
+- [axiox](https://github.com/axios/axios).
 
-```bash
-# using npm
-npm start
+## Installation
+1. Clone the repository:
+ git clone https://github.com/itsajay2195/Clarkrn.git
 
-# OR using Yarn
-yarn start
-```
+2. Navigate to the project directory:
+ cd <folder>
 
-## Step 2: Start your Application
+3. Install dependencies:
+  npm install 
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+4. pod installation for iOS:
+ cd ios> pod install
 
-### For Android
+## Running the App
 
-```bash
-# using npm
-npm run android
+1. For iOS:
+   npx react-native run-ios
 
-# OR using Yarn
-yarn android
-```
+2. For Android:
+  npx react-native run-android
 
-### For iOS
 
-```bash
-# using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+## Folder structure
 
-Now that you have successfully run the app, let's modify it.
+This template follows a very simple project structure:
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- `src`: This folder is the main container of all the code inside your application.
+  - `assets`: Asset folder to store all images, etc
+  - `components`: Folder to store any common component that you use through the app (such as a generic button)
+  - `constants`: Folder to store and maintain the context that we have such as screen constants and other variable constants.
+  - `Context`: This directory is dedicated to managing application contexts and global state. Contexts are a powerful tool for sharing data and state across various parts of your app without the need for explicit prop drilling. Here's how it's 
+     structured:
+     - `ProductContext.js`: An example of a context file that handles product-related data. which could accessed on different components.
+  - `screens`: Folder that contains all your application screens/features.
+    - `Screen`: Each screen should be stored inside its folder and inside it a file for its code and a separate one for the styles and tests.
+      - `ProductListScreen`
+            - `Components`- Folder to store component that is specific to the product list screen.
+            - `ProductListScreen.tsx` -> This file holds the logic for the products list screen.
+       - `ProductDetailsScreen`
+            - `Components`- Folder to store component that is specific to the product details screen.
+            - `ProductDetailsScreen.tsx` -> This file holds the logic for the product details screen.
+  - `stack`: Folder to store the navigation stack and the root navigation, and it is structured as below:
+      - `RootNavigation.js`: This file defines the core navigation structure for your React Native app using the React Navigation library. It sets up a stack navigator to manage the navigation flow between screens.
+  - `style`: Folder to store all the styling concerns related to the application theme and it is structured as below:
+      - `theme.ts`:This file defines an appConfig object containing colors, font sizes, window dimensions, and platform information for a React Native application. 
+  - `types`: Folder to store all the proptypes of the components and it is structure as below:
+      - `PropTypes.ts`: This file defines TypeScript interfaces and type definitions for various components and props used throughout the React Native application.
+  - `App.js`: Main component that starts your whole app.
+  - `index.js`: Entry point of your application as per React-Native standards.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
