@@ -11,7 +11,7 @@ const Line: React.FC<LineProps> = ({lineHeight}) => {
       backgroundColor: appConfig.colors.grey,
     };
   }, [lineHeight]);
-  return <View style={lineStyle} />;
+  return <View style={lineStyle} testID="line" />;
 };
 
 export default Line;

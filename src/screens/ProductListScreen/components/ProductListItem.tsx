@@ -13,6 +13,7 @@ import {SCREEN_CONSTANTS} from '../../../constants/ScreenConstants';
 import {ProductListItemProps} from '../../../types/propTypes';
 import appConfig from '../../../styles/theme';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import theme from '../../../styles/theme';
 
 const ProductListItem: React.FC<ProductListItemProps> = ({
   item,
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '700',
-    color: 'black',
+    color: appConfig.colors.black,
     marginRight: 14,
   },
   brand: {

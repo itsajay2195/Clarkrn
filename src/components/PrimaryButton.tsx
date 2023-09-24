@@ -35,6 +35,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     <TouchableOpacity
       disabled={disabled}
       style={styles.container}
+      testID="primary-button"
       onPress={onPress}>
       <Text style={styles.textStyle}>{title || 'Add to cart'}</Text>
     </TouchableOpacity>
